@@ -20,7 +20,7 @@ export default function Login(){
       const { data } = await api.post('/auth/login',{ email, password })
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('refreshToken', data.refreshToken)
-      nav('/')
+      nav('/dashboard')
     }catch(err){
       setError(err.response?.data?.message || 'Login failed')
     }finally{
@@ -29,8 +29,8 @@ export default function Login(){
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] grid place-items-center">
-      <Card className="w-full max-w-sm">
+    <div className="flex justify-center py-16">
+      <Card className="w-full max-w-sm shadow-md">
         <h2 className="text-2xl font-semibold mb-4">Login</h2>
         <form onSubmit={onSubmit} className="space-y-4">
           <Input placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />

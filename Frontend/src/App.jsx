@@ -10,6 +10,8 @@ import Habits from './pages/Habits.jsx'
 import Challenges from './pages/Challenges.jsx'
 import Reminders from './pages/Reminders.jsx'
 import Community from './pages/Community.jsx'
+import Home from './pages/Home.jsx'
+import NotFound from './pages/NotFound.jsx'
 import Layout from './components/Layout.jsx'
 import { useEffect, useState } from 'react'
 
@@ -45,9 +47,10 @@ export default function App() {
     <Layout>
       <WelcomeSplash />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/activities" element={<PrivateRoute><Activities /></PrivateRoute>} />
         <Route path="/nutrition" element={<PrivateRoute><Nutrition /></PrivateRoute>} />
         <Route path="/sleep" element={<PrivateRoute><Sleep /></PrivateRoute>} />
@@ -56,6 +59,7 @@ export default function App() {
         <Route path="/challenges" element={<PrivateRoute><Challenges /></PrivateRoute>} />
         <Route path="/reminders" element={<PrivateRoute><Reminders /></PrivateRoute>} />
         <Route path="/community" element={<PrivateRoute><Community /></PrivateRoute>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   )

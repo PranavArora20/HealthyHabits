@@ -26,6 +26,11 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
+// root route
+app.get('/', (req,res)=>{
+  res.status(200).json({ message: 'HealthyHabits API', status: 'ok' });
+});
+
 // test route
 app.use("/api/health", healthRoutes);
 
@@ -38,5 +43,16 @@ app.use("/api/challenges", challengeRouter);
 app.use('/api/habits',habitRouter)
 app.use('/api/reminders',reminderRouter)
 app.use('/api/community',communityRouter)
+
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Route not found', path: req.originalUrl });
+});
+
+// error handler
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(err.status || 500).json({ message: 'Internal Server Error', error: err.message });
+});
 
 module.exports = app;

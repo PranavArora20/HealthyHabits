@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { useEffect, useRef, useState } from "react";
 import ToggleSwitch from "./ToggleSwitch";
@@ -18,6 +18,7 @@ export default function Layout({ children }) {
   const [open, setOpen] = useState(false);
   const [authed, setAuthed] = useState(isAuthed());
   const panelRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onStorage = () => setAuthed(isAuthed());
@@ -32,7 +33,7 @@ export default function Layout({ children }) {
   const handleLogout = () => {
     localStorage.clear();
     setAuthed(false);
-    location.href = "/login";
+    navigate('/login');
   };
 
   const closeMenu = () => setOpen(false);
